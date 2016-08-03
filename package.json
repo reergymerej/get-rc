@@ -20,5 +20,21 @@
   "license": "ISC",
   "directories": {
     "test": "test"
-  }
+  },
+  "description": "easily load runtime configuration files",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reergymerej/get-rc.git"
+  },
+  "keywords": [
+    "config",
+    "loader",
+    "runtime",
+    "config"
+  ],
+  "author": "Jeremy Greer <jeremy.greer.atl@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/reergymerej/get-rc/issues"
+  },
+  "homepage": "https://github.com/reergymerej/get-rc#readme"
 }
