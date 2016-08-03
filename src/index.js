@@ -4,6 +4,10 @@ import path from 'path';
 let configFileName = '';
 let topDir = '/';
 
+function getHomePath() {
+  return process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
 function log(...args) {
   if (process.env.NODE_ENV !== 'production') {
     process.stdout.write(...args);
@@ -66,6 +70,8 @@ export function getConfig(dir = process.cwd()) {
 
   const current = topDir;
   configs.push(getConfigInDir(current));
+
+  configs.push(getConfigInDir(getHomePath()));
 
   return combineConfigs(configs);
 }
