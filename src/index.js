@@ -10,7 +10,7 @@ function getHomePath() {
 
 function log(...args) {
   if (process.env.NODE_ENV !== 'production') {
-    console.log(...args); //eslint-disable-line
+    console.log('[get-rc]', ...args); //eslint-disable-line
   }
 }
 
@@ -50,6 +50,15 @@ function getConfigInDir(dir) {
   }
 }
 
+function walkUpTree(startDir, endDir, callback) {
+  let currentDir = startDir;
+
+  while (currentDir.indexOf(endDir) === 0) {
+    callback(currentDir);
+    currentDir = path.join(currentDir, '..');
+  }
+}
+
 /**
 * Find and merge all configs.
 * @param {String} [dir] - defaults to cwd
@@ -60,18 +69,11 @@ export function getConfig(dir = process.cwd()) {
     throw new Error('What is your config file name?  Use setConfigName.');
   }
 
-  const dirs = dir.replace(topDir, '').split(path.sep).slice(1);
   const configs = [];
-  while (dirs.length) {
-    const current = path.join(topDir, dirs.join(path.sep));
-    configs.push(getConfigInDir(current));
-    dirs.pop();
-  }
 
-  log('configs', configs);
-
-  const current = topDir;
-  configs.push(getConfigInDir(current));
+  walkUpTree(dir, topDir, (currentDir) => {
+    configs.push(getConfigInDir(currentDir));
+  });
 
   configs.push(getConfigInDir(getHomePath()));
 
