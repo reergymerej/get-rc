@@ -1,9 +1,12 @@
 # get-rc
 
-Sets the name of the config file we're looking for.
-setConfigName('.foorc')
+load rc files up from the current dir and ~, merged together
 
-@param {String} [dir=process.cwd()]
+
+Sets the name of the config file we're looking for.  
+setConfigName('.foorc')  
+
+@param {String} [dir=process.cwd()]  
 getConfig()
 
 

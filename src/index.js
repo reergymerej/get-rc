@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 let configFileName = '';
+let topDir = '/';
 
 function log(...args) {
   if (process.env.NODE_ENV !== 'production') {
@@ -19,8 +20,12 @@ function parseConfigFile(file) {
   }
 }
 
+/**
+* @param {String} dir
+* @return {Object} empty if no valid config found
+*/
 function getConfigInDir(dir) {
-  let config = null;
+  let config = {};
 
   try {
     const fileName = path.join(dir, configFileName);
@@ -29,7 +34,6 @@ function getConfigInDir(dir) {
 
   } catch (e) {
     // no config present
-    return null;
   } finally {
     return config;
   }
@@ -50,4 +54,8 @@ export function getConfig(dir = process.cwd()) {
 
 export function setConfigName(name) {
   configFileName = name;
+}
+
+export function setTopDir(dir) {
+  topDir = dir;
 }
