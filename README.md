@@ -20,11 +20,11 @@ setConfigName('.foorc')
 ### getConfig([path])
 * path {String} - defaults to process.cwd()  
 
-Syncronously loads config files specified in [setConfigName](#setConfigName) in each level of
-the path.  Configs are merged together with the most local to `path` taking
-precedence. Also checks the user's HOME directory.  An object will *always* be
-returned, even if no config is found or there are problems parsing one or more
-of them.
+Syncronously loads config files specified in [setConfigName](#setconfignamename)
+in each level of the path.  Configs are merged together with the most local to
+`path` taking precedence. Also checks the user's HOME directory.  An object will
+*always* be returned, even if no config is found or there are problems parsing
+one or more of them.
 
 ```js
 const config = getConfig('/foo/bar/baz');
