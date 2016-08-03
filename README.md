@@ -1,14 +1,31 @@
 # get-rc
 
-load rc files up from the current dir and ~, merged together
+easily load runtime configuration files
 
 
-Sets the name of the config file we're looking for.  
+## Usage
+
+### setConfigName(name)
+* name {String}
+
+Sets the name of the config file we're looking for.  You only have to call this
+once.
+
+```js
 setConfigName('.foorc')  
+```
 
-@param {String} [dir=process.cwd()]  
-getConfig()
+### getConfig([path])
+* path {String} - defaults to process.cwd()  
 
+Gets config files specified in [setConfigName]() in each level of the path.
+Configs are merged together with the most local to `path` taking precedence.
+Also checks the user's HOME directory.  An object will *always* be returned,
+even if no config is found or there are problems parsing one or more of them.
+
+```js
+const config = getConfig('/foo/bar/baz');
+```
 
 
 
