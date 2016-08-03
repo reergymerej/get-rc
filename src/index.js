@@ -20,12 +20,19 @@ function parseConfigFile(file) {
   }
 }
 
+// @param {Object[]} configs
+function combineConfigs(configs) {
+  const filteredConfigs = configs.reverse()
+    .filter(config => !!config);
+  return Object.assign(...filteredConfigs, {});
+}
+
 /**
 * @param {String} dir
-* @return {Object} empty if no valid config found
+* @return {Object/null}
 */
 function getConfigInDir(dir) {
-  let config = {};
+  let config = null;
 
   try {
     const fileName = path.join(dir, configFileName);
@@ -49,7 +56,18 @@ export function getConfig(dir = process.cwd()) {
     throw new Error('What is your config file name?  Use setConfigName.');
   }
 
-  return getConfigInDir(dir);
+  const dirs = dir.replace(topDir, '').split(path.sep).slice(1);
+  const configs = [];
+  while (dirs.length) {
+    const current = path.join(topDir, dirs.join(path.sep));
+    configs.push(getConfigInDir(current));
+    dirs.pop();
+  }
+
+  const current = topDir;
+  configs.push(getConfigInDir(current));
+
+  return combineConfigs(configs);
 }
 
 export function setConfigName(name) {
