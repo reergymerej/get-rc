@@ -7,6 +7,12 @@ easily load runtime configuration files
 ![screen shot 2016-08-03 at 12 32 57](https://cloud.githubusercontent.com/assets/1720010/17375402/6ce33518-5976-11e6-97cd-63dea4799ecd.png)
 
 
+## Installation
+
+```sh
+npm i get-rc
+```
+
 ## Usage
 
 ### setConfigName(name)
