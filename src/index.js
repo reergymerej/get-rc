@@ -53,9 +53,13 @@ function getConfigInDir(dir) {
 function walkUpTree(startDir, endDir, callback) {
   let currentDir = startDir;
 
-  while (currentDir.indexOf(endDir) === 0) {
+  while (true) {
+    // log('walking', currentDir)
     callback(currentDir);
     currentDir = path.join(currentDir, '..');
+    if (currentDir === endDir) {
+      break;
+    }
   }
 }
 

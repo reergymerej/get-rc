@@ -2,6 +2,8 @@
 
 easily load runtime configuration files
 
+![screen shot 2016-08-03 at 12 32 57](https://cloud.githubusercontent.com/assets/1720010/17375402/6ce33518-5976-11e6-97cd-63dea4799ecd.png)
+
 
 ## Usage
 
@@ -18,10 +20,11 @@ setConfigName('.foorc')
 ### getConfig([path])
 * path {String} - defaults to process.cwd()  
 
-Gets config files specified in [setConfigName]() in each level of the path.
-Configs are merged together with the most local to `path` taking precedence.
-Also checks the user's HOME directory.  An object will *always* be returned,
-even if no config is found or there are problems parsing one or more of them.
+Syncronously loads config files specified in [setConfigName]() in each level of
+the path.  Configs are merged together with the most local to `path` taking
+precedence. Also checks the user's HOME directory.  An object will *always* be
+returned, even if no config is found or there are problems parsing one or more
+of them.
 
 ```js
 const config = getConfig('/foo/bar/baz');
