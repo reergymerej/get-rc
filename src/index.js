@@ -4,8 +4,9 @@ import path from 'path';
 let configFileName = '';
 
 function log(...args) {
-  console.log(process.env.NODE_ENV);
-  console.log(...args);
+  if (process.env.NODE_ENV !== 'production') {
+    process.stdout.write(...args);
+  }
 }
 
 function parseConfigFile(file) {
