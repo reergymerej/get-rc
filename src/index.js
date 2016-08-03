@@ -10,7 +10,7 @@ function getHomePath() {
 
 function log(...args) {
   if (process.env.NODE_ENV !== 'production') {
-    process.stdout.write(...args);
+    console.log(...args); //eslint-disable-line
   }
 }
 
@@ -67,6 +67,8 @@ export function getConfig(dir = process.cwd()) {
     configs.push(getConfigInDir(current));
     dirs.pop();
   }
+
+  log('configs', configs);
 
   const current = topDir;
   configs.push(getConfigInDir(current));
