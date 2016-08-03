@@ -4,6 +4,7 @@ import path from 'path';
 let configFileName = '';
 
 function log(...args) {
+  console.log(process.env.NODE_ENV);
   console.log(...args);
 }
 
@@ -18,7 +19,6 @@ function parseConfigFile(file) {
 }
 
 function getConfigInDir(dir) {
-  console.log('getConfigInDir', dir);
   let config = null;
 
   try {
@@ -40,6 +40,10 @@ function getConfigInDir(dir) {
 * @return {Object}
 */
 export function getConfig(dir = process.cwd()) {
+  if (!configFileName) {
+    throw new Error('What is your config file name?  Use setConfigName.');
+  }
+
   return getConfigInDir(dir);
 }
 
